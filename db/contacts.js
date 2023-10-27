@@ -1,7 +1,7 @@
 const fs = require('fs/promises');
 const path = require('path');
 const crypto = require('crypto');
-const contactsPath = path.join(__dirname, "db/contacts.json")
+const contactsPath = path.join(__dirname, "db", "contacts.json")
 
 async function readContacts() {
     try {
@@ -43,21 +43,20 @@ async function getContactById(contactId) {
         return null;
     }
 
-    const updateContacts = {...contactId};
     contacts.splice(index, 1)
-    await writeContacts(newContacts)
+    await writeContacts(contacts)
     return contacts;
 
   }
   
-  async function addContact(name, email, phone) {
-    const contacts =await readContacts();
+  async function addContact(contact) {
+    const contacts = await readContacts();
     const id = crypto.randomUUID();
-    const newContact = {id, name, email, phone};
+    const newContact = { id, ...contact };
     contacts.push(newContact);
     await writeContacts(contacts);
     return newContact;
-  }
+}
 
   module.exports = {
     listContacts,
