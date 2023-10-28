@@ -1,13 +1,13 @@
-const Contacts = require('./db/contacts');
+const Contacts = require('./contacts');
 const { Command } = require("commander");
 const program = new Command();
 
 program
-.option("-a, --action <action>", "choose action")
-.option("-i, id <id>", "user id")
-.option("-n, name <name>", "user name")
-.option("-e, email <email>", "user email")
-.option("-p, phone <phone>", "user phone");
+  .option("-a, --action <action>", "choose action")
+  .option("-i, --id <id>", "user id")
+  .option("-n, --name <name>", "user name")
+  .option("-e, --email <email>", "user email")
+  .option("-p, --phone <phone>", "user phone");
 
 program.parse(process.argv);
 
